@@ -8,33 +8,33 @@ S5 = ""                                 # FALSE
 S6 = "A man, a plan, a canal: Panama"   # TRUE
 
 # Pointer from both ends
-def palindrome(S):
+# def palindrome(S):
 
-    newS = ""
+#     newS = ""
 
-    for i in range(len(S)):
-        if S[i].isalpha() or S[i].isnumeric():
-            newS += S[i]
+#     for i in range(len(S)):
+#         if S[i].isalpha() or S[i].isnumeric():
+#             newS += S[i]
 
-    newS = newS.lower()
+#     newS = newS.lower()
 
-    print(newS)
-    if len(newS) == 0:
-        return False
+#     print(newS)
+#     if len(newS) == 0:
+#         return False
     
-    if len(newS) == 1:
-        return True 
+#     if len(newS) == 1:
+#         return True 
 
-    l = 0 
-    r = len(newS) - 1 
+#     l = 0 
+#     r = len(newS) - 1 
 
-    while l < r:
-        if newS[l] != newS[r]:
-            return False 
-        else:
-            l += 1 
-            r -= 1
-    return True 
+#     while l < r:
+#         if newS[l] != newS[r]:
+#             return False 
+#         else:
+#             l += 1 
+#             r -= 1
+#     return True 
 
 # print(palindrome(S1))
 # print(palindrome(S2))
@@ -118,11 +118,65 @@ def palindrome_2(S):
 
     return True
 
-print(palindrome_2(S1))
-print(palindrome_2(S2))
-print(palindrome_2(S3))
-print(palindrome_2(S4))
-print(palindrome_2(S5))
-print(palindrome_2(S6))
+# print(palindrome_2(S1))
+# print(palindrome_2(S2))
+# print(palindrome_2(S3))
+# print(palindrome_2(S4))
+# print(palindrome_2(S5))
+# print(palindrome_2(S6))
+
+#-------------------------------------------------------------------------------------
+# MY SOLUTION
+#-------------------------------------------------------------------------------
+## ALMOST PALINDROME
+
+def almost_palindrome(S, num_of_split):
+
+    S = S.lower()
+
+    if len(S) < 2:
+        return True
+
+    l = 0 
+    r = len(S) - 1 
+
+    while l < r:
+
+        if S[l] != S[r]:
+            num_of_split += 1
+
+            # print(S, num_of_split)
+            if num_of_split == 1:
+
+                left_string = S[:l] + S[l+1:]
+                right_string = S[:r] + S[r+1:]
+
+                if almost_palindrome(left_string, num_of_split) or almost_palindrome(right_string, num_of_split):
+                    return True 
+                else:
+                    return False 
+
+            return False
+        else: 
+            l += 1 
+            r -= 1
+
+    return True
+
+## Testcases for ALMOST PALINDROME
+a = "raceacar"          # TRUE 
+b = "abccdba"           # TRUE 
+c = "abcdefdba"         # FALSE
+d = ""                  # TRUE
+e = "a"                 # TRUE
+f = "ab"                # TRUE
+
+print(almost_palindrome(a, 0))
+print(almost_palindrome(b, 0))
+print(almost_palindrome(c, 0))
+print(almost_palindrome(d, 0))
+print(almost_palindrome(e, 0))
+print(almost_palindrome(f, 0))
+
 
 
