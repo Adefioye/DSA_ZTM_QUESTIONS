@@ -5,6 +5,88 @@ arr3 = []
 arr4 = [3, 4, 2]
 arr5 = [5, 0, 3, 0, 0, 0, 2, 3, 4, 2, 1]
 
+#-------------------------------------------------------------------------------------
+# MY SECOND SOLUTION
+#-------------------------------------------------------------------------------
+## BRUTE FORCE SOLUTION
+
+def brute_max_trapping_water(array):
+    maxL = 0 
+    maxR = 0 
+    total_water = 0 
+
+    for j in range(len(array)):
+        current_value = array[j]
+
+        l = j - 1 
+        r = j + 1 
+
+        if l >= 0:
+            maxL = array[l] 
+        if r < len(array):
+            maxR = array[r]
+
+        while l - 1 >= 0:
+            maxL = max(array[l - 1], maxL)
+            l -= 1 
+
+        while r + 1 < len(array):
+            maxR = max(array[r + 1], maxR) 
+            r += 1
+
+        trapped_water = min(maxL, maxR) - current_value
+
+        if trapped_water > 0:
+            total_water += trapped_water
+                
+    return total_water
+
+def optimal_max_trapping_water(array):
+
+    maxL = 0 
+    maxR = 0 
+    total_water = 0 
+    l = 0 
+    r = len(array) - 1 
+
+
+    while l < r:
+        current_height = min(array[l], array[r]) 
+
+        if current_height == array[l]:
+            if maxL > current_height:
+                trapped_water = maxL - current_height 
+                total_water += trapped_water 
+            else:
+                maxL = current_height 
+            
+            l += 1 
+
+        else:
+            if maxR > current_height:
+                trapped_water = maxR - current_height 
+                total_water += trapped_water 
+            else:
+                maxR = current_height 
+            
+            r -= 1 
+
+    return total_water
+
+
+# print(brute_max_trapping_water(arr1))
+# print(brute_max_trapping_water(arr2))
+# print(brute_max_trapping_water(arr3))
+# print(brute_max_trapping_water(arr4))
+# print(brute_max_trapping_water(arr5))
+
+print(optimal_max_trapping_water(arr1))
+print(optimal_max_trapping_water(arr2))
+print(optimal_max_trapping_water(arr3))
+print(optimal_max_trapping_water(arr4))
+print(optimal_max_trapping_water(arr5))
+
+
 # def max_trapping_water(array):
 #     A = 0 
 #     l = 0
@@ -49,6 +131,10 @@ arr5 = [5, 0, 3, 0, 0, 0, 2, 3, 4, 2, 1]
 
 #     return A
 
+#-------------------------------------------------------------------------------------
+# MY FIRST SOLUTION
+#-------------------------------------------------------------------------------
+
 ## BRUTE FORCE SOLUTION (MY SOLUTION)
 
 # def max_trapping_water_1(array):
@@ -87,47 +173,47 @@ arr5 = [5, 0, 3, 0, 0, 0, 2, 3, 4, 2, 1]
 
 #     return A
 
-def max_trapping_water_2(array):
+# def max_trapping_water_2(array):
 
-    A = 0 
-    maxL = 0 
-    maxR = 0 
-    l = 0 
-    r = len(array) - 1 
-    array_length = len(array)
+#     A = 0 
+#     maxL = 0 
+#     maxR = 0 
+#     l = 0 
+#     r = len(array) - 1 
+#     array_length = len(array)
 
-    while l < r:
+#     while l < r:
 
-        min_num = min(array[l], array[r])
+#         min_num = min(array[l], array[r])
 
-        if min_num == array[l]:
+#         if min_num == array[l]:
 
-            current_value = array[l]
+#             current_value = array[l]
 
-            if maxL > current_value:
-                A += (maxL - current_value)
-                l += 1 
-            else:
-                maxL = current_value 
-                l += 1 
+#             if maxL > current_value:
+#                 A += (maxL - current_value)
+#                 l += 1 
+#             else:
+#                 maxL = current_value 
+#                 l += 1 
 
-        else:
-            current_value = array[r]
+#         else:
+#             current_value = array[r]
 
-            if maxR > current_value:
-                A += (maxR - current_value)
-                r -= 1 
-            else:
-                maxR = current_value 
-                r -= 1 
+#             if maxR > current_value:
+#                 A += (maxR - current_value)
+#                 r -= 1 
+#             else:
+#                 maxR = current_value 
+#                 r -= 1 
 
-    return A
+#     return A
 
-print(max_trapping_water_2(arr1))
-print(max_trapping_water_2(arr2))
-print(max_trapping_water_2(arr3))
-print(max_trapping_water_2(arr4))
-print(max_trapping_water_2(arr5))
+# print(max_trapping_water_2(arr1))
+# print(max_trapping_water_2(arr2))
+# print(max_trapping_water_2(arr3))
+# print(max_trapping_water_2(arr4))
+# print(max_trapping_water_2(arr5))
 
 
 
