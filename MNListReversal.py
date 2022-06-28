@@ -134,7 +134,7 @@ linked_list.push(10)
 print(linked_list.print(linked_list.head))
 # linked_list.m_n_reversal(1, 5)
 # print(linked_list.print(linked_list.head))
-linked_list.m_n_reversal(3, 7)
+linked_list.m_n_reversal(2, 7)
 print(linked_list.print(linked_list.head))
 
 
