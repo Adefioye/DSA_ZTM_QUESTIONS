@@ -1,5 +1,2 @@
-import math 
-
-s = "abc"
-ls = list(s)
-ls.reverse()
+seen_map = {"x": 1}
+print(seen_map["y"])
