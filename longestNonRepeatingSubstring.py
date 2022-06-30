@@ -4,7 +4,7 @@ S3 = ""         # 0
 S4 = "abcbda"   # 4 
 
 #-------------------------------------------------------------------------------------
-# MY SECOND SOLUTION
+# MY SECOND SOLUTION (MORE CORRECT THAN THE FIRST SOLUTION)
 #-------------------------------------------------------------------------------
 ## BRUTE FORCE SOLUTION
 def brute_longest_non_repeating_substring(S):
