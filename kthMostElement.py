@@ -68,7 +68,7 @@ def partition(array, left, right):
 
     return partition_idx 
 
-def quick_sort(array, left, right, idx_to_find):
+def quick_select(array, left, right, idx_to_find):
 
     print(array[left : right + 1])
 
@@ -81,14 +81,18 @@ def quick_sort(array, left, right, idx_to_find):
             print(f"Array: {array}, Index to find: {idx_to_find}, value: {array[idx_to_find]}")
             return array[idx_to_find]
         elif idx_to_find < partition_idx:
-            quick_sort(array, left, partition_idx - 1, idx_to_find)
+            return quick_select(array, left, partition_idx - 1, idx_to_find)
         else:
-            quick_sort(array, partition_idx + 1, right, idx_to_find)
+            return quick_select(array, partition_idx + 1, right, idx_to_find)
 
 
+def get_k_most_element(array, k):
+    idx_to_find = len(array) - k 
+    quick_select(array, 0, len(array) - 1, idx_to_find)
 
-print(quick_sort(arr1, 0, len(arr1) - 1, len(arr1) - k1))
+    return array[idx_to_find]
 
+print(get_k_most_element(arr1, k1))
 
 
 
