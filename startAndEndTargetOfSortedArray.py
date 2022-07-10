@@ -7,8 +7,8 @@ arr5 = []; t5 = 3
 #-------------------------------------------------------------------------------------
 # MY FIRST SOLUTION
 #-------------------------------------------------------------------------------
-
-def binary_search(array, target):
+# BRUTE FORCE
+def brute_binary_search(array, target):
 
     left = 0
     right = len(array) - 1 
@@ -40,8 +40,61 @@ def binary_search(array, target):
     return [-1, -1]
 
 
-print(binary_search(arr1, t1))
-print(binary_search(arr2, t2))
-print(binary_search(arr3, t3))
-print(binary_search(arr4, t4))
-print(binary_search(arr5, t5))
+# OPTIMAL SOLUTION
+def binary_search(array, left, right, target):
+
+    while left <= right:
+        mid = (left + right) // 2
+
+        if array[mid] == target:
+            return mid
+        elif array[mid] < target:
+            left = mid + 1 
+        else:
+            right = mid - 1
+
+    return -1
+
+def optimal_target_range(array, target):
+
+    if len(array) == 0:
+        return [-1, -1]
+
+    first_pos = binary_search(array, 0, len(array) - 1, target)
+
+    if first_pos == -1:
+        return [-1, -1] 
+
+    start_pos = first_pos 
+    end_pos = first_pos 
+    temp_left = -1 
+    temp_right = -1 
+
+    while start_pos != -1:
+        temp_left = start_pos 
+        start_pos = binary_search(array, 0, start_pos - 1, target)
+
+    start_pos = temp_left 
+
+    while end_pos != -1:
+        temp_right = end_pos 
+        end_pos = binary_search(array, end_pos + 1, len(array) - 1, target)
+
+    end_pos = temp_right
+
+    return [start_pos, end_pos]
+
+
+
+# print(brute_binary_search(arr1, t1))
+# print(brute_binary_search(arr2, t2))
+# print(brute_binary_search(arr3, t3))
+# print(brute_binary_search(arr4, t4))
+# print(brute_binary_search(arr5, t5))
+print(optimal_target_range(arr1, t1))
+print(optimal_target_range(arr2, t2))
+print(optimal_target_range(arr3, t3))
+print(optimal_target_range(arr4, t4))
+print(optimal_target_range(arr5, t5))
+
+
