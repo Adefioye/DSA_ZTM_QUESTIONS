@@ -1,3 +1,5 @@
+from collections import deque
+
 testMatrix = [
   [1, 2, 3, 4, 5],
   [6, 7, 8, 9, 10],
@@ -33,28 +35,28 @@ testMatrix = [
 # print(BFS_twoD(testMatrix))
 
 def find_bfs(matrix):
-    row_size = len(matrix)
-    col_size = len(matrix[0])
-    dirs = [(-1, 0), (0, 1), (1, 0), (0, -1)]
-    result = []
+    ROWS = len(matrix)
+    COLS = len(matrix[0])
+
     visited = set()
-    queue = [(0, 0)]
+    result = []
+    queue = deque()
+    queue.append((0, 0))
+    dirs = [(-1, 0), (0, 1), (1, 0), (0, -1)]
 
-    while len(queue) > 0:
-        row, col = queue.pop(0)
+    while queue:
+        curPosition = queue.popleft()
+        row, col = curPosition
 
-        print(row, col)
+        if row < 0 or row >= ROWS or col < 0 or col >= COLS or (row, col) in visited:
+            continue 
+
+        visited.add((row, col))
+        result.append(matrix[row][col])
 
         for dir in dirs:
-            r = row + dir[0]
-            c = col + dir[1]
-
-            if r < 0 or r >= row_size or c < 0 or c >= col_size or (r, c) in visited:
-                continue 
-
-            queue.append((r, c))
-            visited.add((r, c))
-            result.append(matrix[r][c])
+            r, c = dir
+            queue.append((row + r, col + c))
 
     return result
 
