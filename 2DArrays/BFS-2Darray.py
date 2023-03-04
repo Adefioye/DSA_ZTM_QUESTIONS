@@ -42,21 +42,23 @@ def find_bfs(matrix):
     result = []
     queue = deque()
     queue.append((0, 0))
+    visited.add((0, 0))
     dirs = [(-1, 0), (0, 1), (1, 0), (0, -1)]
 
     while queue:
         curPosition = queue.popleft()
-        row, col = curPosition
-
-        if row < 0 or row >= ROWS or col < 0 or col >= COLS or (row, col) in visited:
-            continue 
-
-        visited.add((row, col))
-        result.append(matrix[row][col])
-
+        r, c = curPosition
+        result.append(matrix[r][c])
+        
         for dir in dirs:
-            r, c = dir
-            queue.append((row + r, col + c))
+            row = r + dir[0]
+            col = c + dir[1]
+
+            if row < 0 or row >= ROWS or col < 0 or col >= COLS or (row, col) in visited:
+                continue 
+            
+            queue.append((row, col))
+            visited.add((row, col))
 
     return result
 
